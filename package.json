@@ -1,0 +1,15 @@
+{
+  "name": "enigma",
+  "version": "1.0.0",
+  "description": "Enigma machine for study project",
+  "main": "enigma.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "enigma",
+    "cripto"
+  ],
+  "author": "Luigi Polidório",
+  "license": "ISC"
+}
