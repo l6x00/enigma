@@ -10,11 +10,45 @@ export default class Rotor extends Walze {
     this.setName(name);
   }
 
-  sendSignal = (signal, reverse) => {};
+  sendSignal = (signal, reverse) => {
+    let position;
 
-  rotate = () => {};
+    position = this.alphabet.indexOf(signal);
+    position =
+      (position + this.position + this.alphabet.lenght - this.ringsetting) %
+      this.alphabet.lenght;
 
-  inNotch = () => {};
+    signal = this.alphabet[position];
+
+    if (reverse) position = this.wiring.indexOf(signal);
+
+    signal = reverse ? this.alphabet[position] : this.wiring[pos];
+
+    position = this.alphabet.indexOf(signal);
+    position =
+      (position + (this.alphabet.length - this.position + this.ringsetting)) %
+      this.alphabet.length;
+
+    signal = this.alphabet[position];
+    return signal;
+  };
+
+  rotate = () => {
+    this.position = (this.position + 1) % this.alphabet.length;
+  };
+
+  inNotch = () => {
+    let inNotch = false;
+
+    this.notches.foreach((notch) => {
+        if (this.position === this.alphabet.indexOf(notch)) {
+            inNotch = true;
+            break;
+        }
+    })
+
+    return inNotch;
+  };
 
   setNotches = notches => {};
 
