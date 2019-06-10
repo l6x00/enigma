@@ -50,7 +50,40 @@ export default class Rotor extends Walze {
     return inNotch;
   };
 
-  setNotches = notches => {};
+  setNotches = notches => {
+    notches = this.formatNotches(notches);
+  
+    this.verifyNotchesAreUnique(notches);
+    this.verifyLengthOfNotches(notches);
+  
+    this.notches = notches;
+  };
+
+  formatNotches = (notches) => {
+    if ( typeof notches === 'string' ) {
+      notches = notches.toUpperCase().split('');
+    } else if ( typeof notches === 'object' && notches instanceof Array ) {
+      notches = notches.map(function(notch) {
+        return notch.toString().toUpperCase();
+      });
+    } else {
+      notches = [];
+    }
+
+    return notches
+  }
+
+  verifyNotchesAreUnique = (notches) => {
+    if ( notches.some( function(e,i,l){ return l.indexOf(e) !== l.lastIndexOf(e);} ) ) {
+      throw new Error('Os notches consistem em caracteres únicos.');
+    }
+  }
+
+  verifyLengthOfNotches = (notches) => {
+    if ( notches.length > this.alphabet.length ) {
+      throw new Error('Você não pode ter mais notches do que caracteres no rotor.');
+    }
+  }
 
   getPosition = () => this.alphabet[this.position];
 
