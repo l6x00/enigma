@@ -4,13 +4,13 @@ export default class Enigma {
   alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
   rotors = null;
   ukw = null;
-  steckerbrett = null;
+  plugboard = null;
   reflector = null;
 
-  constructor(rotors, ukw, steckerbrett, reflector) {
+  constructor(rotors, ukw, plugboard, reflector) {
     this.rotors = rotors;
     this.ukw = ukw;
-    this.steckerbrett = steckerbrett;
+    this.plugboard = plugboard;
     this.reflector = reflector;
   }
 

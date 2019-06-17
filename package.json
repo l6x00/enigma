@@ -11,5 +11,10 @@
     "cripto"
   ],
   "author": "Luigi Polidório",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "figlet": "^1.2.3",
+    "inquirer": "^6.3.1"
+  }
 }
