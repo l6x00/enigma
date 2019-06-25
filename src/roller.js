@@ -1,6 +1,6 @@
-export default class Walze {
-  alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
-  name = "";
+export default class Roller {
+  alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  name = '';
   wiring = [];
 
   constructor(wiring, name) {
@@ -15,9 +15,9 @@ export default class Walze {
   };
 
   convertWiring = wiring => {
-    if (typeof wiring === "string") {
-      wiring = wiring.toUpperCase().split("");
-    } else if (typeof wiring === "object" && wiring instanceof Array) {
+    if (typeof wiring === 'string') {
+      wiring = wiring.toUpperCase().split('');
+    } else if (typeof wiring === 'object' && wiring instanceof Array) {
       wiring = wiring.map(function(wire) {
         return wire.toString().toUpperCase();
       });
@@ -36,13 +36,13 @@ export default class Walze {
       wiring.length !== this.alphabet.length
     ) {
       throw new Error(
-        "O Walze deve ter " + this.alphabet.length + " caracteres únicos."
+        'O Walze deve ter ' + this.alphabet.length + ' caracteres únicos.'
       );
     }
   };
 
   setName = name => {
-    this.name = typeof wiring === "string" ? name : "";
+    this.name = typeof wiring === 'string' ? name : '';
   };
 
   sendSignal = (signal, reverse) => {

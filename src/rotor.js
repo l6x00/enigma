@@ -1,6 +1,6 @@
-import Walze from "./walze";
+import Roller from './roller';
 
-export default class Rotor extends Walze {
+export default class Rotor extends Roller {
   position = 0;
   ringsetting = 0;
 
@@ -54,17 +54,17 @@ export default class Rotor extends Walze {
 
   setNotches = notches => {
     notches = this.formatNotches(notches);
-  
+
     this.verifyNotchesAreUnique(notches);
     this.verifyLengthOfNotches(notches);
-  
+
     this.notches = notches;
   };
 
-  formatNotches = (notches) => {
-    if ( typeof notches === 'string' ) {
+  formatNotches = notches => {
+    if (typeof notches === 'string') {
       notches = notches.toUpperCase().split('');
-    } else if ( typeof notches === 'object' && notches instanceof Array ) {
+    } else if (typeof notches === 'object' && notches instanceof Array) {
       notches = notches.map(function(notch) {
         return notch.toString().toUpperCase();
       });
@@ -72,20 +72,26 @@ export default class Rotor extends Walze {
       notches = [];
     }
 
-    return notches
-  }
+    return notches;
+  };
 
-  verifyNotchesAreUnique = (notches) => {
-    if ( notches.some( function(e,i,l){ return l.indexOf(e) !== l.lastIndexOf(e);} ) ) {
+  verifyNotchesAreUnique = notches => {
+    if (
+      notches.some(function(e, i, l) {
+        return l.indexOf(e) !== l.lastIndexOf(e);
+      })
+    ) {
       throw new Error('Os notches consistem em caracteres únicos.');
     }
-  }
+  };
 
-  verifyLengthOfNotches = (notches) => {
-    if ( notches.length > this.alphabet.length ) {
-      throw new Error('Você não pode ter mais notches do que caracteres no rotor.');
+  verifyLengthOfNotches = notches => {
+    if (notches.length > this.alphabet.length) {
+      throw new Error(
+        'Você não pode ter mais notches do que caracteres no rotor.'
+      );
     }
-  }
+  };
 
   getPosition = () => this.alphabet[this.position];
 

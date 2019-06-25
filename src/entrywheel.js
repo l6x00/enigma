@@ -1,9 +1,9 @@
-const Walze = require("./walze");
+const Roller = require('./roller');
 
 /**
  *  É o rolo de entrada
  */
-export default class Reflector extends Walze {
+export default class EntryWheel extends Roller {
   constructor(wiring, name) {
     this.setWiring(wiring);
     this.setName(name);

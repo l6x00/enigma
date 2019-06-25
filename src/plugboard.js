@@ -1,6 +1,6 @@
-const Walze = require("./walze");
+const Roller = require('./roller');
 
-export default class Plugboard extends Walze {
+export default class Plugboard extends Roller {
   constructor(plugs, name) {
     this.setName(name);
     this.setPlugs(plugs);
@@ -13,9 +13,9 @@ export default class Plugboard extends Walze {
   };
 
   getPlugsFormated = plugs => {
-    if (typeof plugs === "string") {
-      plugs = plugs.toUpperCase().split(" ");
-    } else if (typeof plugs === "object" && plugs instanceof Array) {
+    if (typeof plugs === 'string') {
+      plugs = plugs.toUpperCase().split(' ');
+    } else if (typeof plugs === 'object' && plugs instanceof Array) {
       plugs = plugs.map(function(plug) {
         return plug.toString().toUpperCase();
       });
@@ -30,7 +30,7 @@ export default class Plugboard extends Walze {
     let wiring = this.alphabet.slice();
 
     plugs.forEach(plug => {
-      plug = plug.split("");
+      plug = plug.split('');
       wiring[this.alphabet.indexOf(plug[0])] = plug[1];
       wiring[this.alphabet.indexOf(plug[1])] = plug[0];
     });
@@ -46,9 +46,9 @@ export default class Plugboard extends Walze {
       plugs.length > Math.floor(this.alphabet.length / 2)
     ) {
       throw new Error(
-        "O Plugboard apenas aceita  " +
+        'O Plugboard apenas aceita  ' +
           Math.floor(this.alphabet.length / 2) +
-          " conexões a serem setadas"
+          ' conexões a serem setadas'
       );
     }
   };

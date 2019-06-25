@@ -1,6 +1,6 @@
-const Walze = require("./walze");
+const Roller = require('./roller');
 
-export default class Umkehrwalze extends Walze {
+export default class Reflector extends Roller {
   constructor(wiring, name) {
     this.setWiring(wiring);
     this.setName(name);
