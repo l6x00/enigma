@@ -5,16 +5,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _walze = _interopRequireDefault(require("./walze"));
+var _roller = _interopRequireDefault(require("./roller"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-class Rotor extends _walze.default {
-  constructor(wiring, notches, name) {
+class Rotor extends _roller.default {
+  constructor(wiring, _notches, name) {
     this.setWiring(wiring);
-    this.setNotches(notches);
+    this.setNotches(_notches);
     this.setName(name);
   }
 

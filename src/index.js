@@ -5,8 +5,8 @@ require('babel-polyfill');
 const chalk = require('chalk');
 const figlet = require('figlet');
 const inquirer = require('inquirer');
-const Enigma = require('./enigma.js');
-const questions = require('./questions.js');
+const { Enigma } = require('./enigma.js');
+const { questions } = require('./questions.js');
 
 const askSettings = async () => {
   const settings = await inquirer.prompt(questions);
@@ -26,7 +26,7 @@ const encrypt = settings => {
   );
 
   console.log(enigma);
-  //   console.log(enigma.string("EXAMPLEMESSAGE"));{};
+  console.log(enigma.encrypt('EXAMPLEMESSAGE'));
 };
 
 const init = async () => {

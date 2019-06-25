@@ -1,6 +1,8 @@
 // Main script
+const { Reflector } = require('./reflector');
+const { Plugboard } = require('./plugboard');
 
-export default class Enigma {
+class Enigma {
   alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   rotors = null;
   ukw = null;
@@ -11,7 +13,7 @@ export default class Enigma {
     this.rotors = rotors;
     this.ukw = ukw;
     this.plugboard = plugboard;
-    this.reflector = reflector;
+    this.reflector = new Reflector(reflector);
   }
 
   sendSignal = () => {
@@ -43,8 +45,10 @@ export default class Enigma {
     (turned[index + 1] && notched[index + 1]) ||
     (turned[index + 1] && notched[index] && index > 0);
 
-  convertToString = string => {
+  encrypt = string => {
     // Convert argument to string, upper case, and remove illegal letters (such as spaces)
+    console.log(this.reflector.wiring);
+
     string = typeof string === 'string' ? string : string.toString();
     string = string
       .toUpperCase()
@@ -53,11 +57,11 @@ export default class Enigma {
 
     let response = '';
     const stringArray = [...string];
-    stringArray.foreach(letter => {
-      response += this.signal(letter);
-    });
+    // stringArray.foreach(letter => {
+    //   response += this.signal(letter);
+    // });
 
-    return response;
+    // return response;
   };
 
   getPositions = () => {
@@ -96,3 +100,5 @@ export default class Enigma {
     });
   };
 }
+
+export { Enigma };
