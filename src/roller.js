@@ -4,14 +4,18 @@ export default class Roller {
   wiring = [];
 
   constructor(wiring, name) {
-    this.setWiring(wiring);
-    this.setName(name);
+    console.log(wiring)
+    //this.setWiring(wiring);
+    //this.setName(name);
   }
 
   setWiring = wiring => {
-    this.verifyUniqueWiring(wiring);
+    console.log("setWiring", wiring)
 
     this.wiring = this.convertWiring(wiring);
+
+    this.verifyUniqueWiring(wiring);
+
   };
 
   convertWiring = wiring => {
@@ -29,8 +33,9 @@ export default class Roller {
   };
 
   verifyUniqueWiring = wiring => {
+    console.log("verifyUniqueWiring", wiring)
     if (
-      wiring.some(function(e, i, l) {
+      this.wiring.some(function(e, i, l) {
         return l.indexOf(e) !== l.lastIndexOf(e);
       }) ||
       wiring.length !== this.alphabet.length

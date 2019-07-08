@@ -1,7 +1,8 @@
-const Roller = require('./roller');
+import Roller from './roller.js'
 
 export default class Plugboard extends Roller {
   constructor(plugs, name) {
+    super()
     this.setName(name);
     this.setPlugs(plugs);
   }

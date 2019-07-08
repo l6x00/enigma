@@ -2,11 +2,11 @@
 
 require('babel-polyfill');
 
-const chalk = require('chalk');
-const figlet = require('figlet');
-const inquirer = require('inquirer');
-const { Enigma } = require('./enigma.js');
-const { questions } = require('./questions.js');
+import chalk from 'chalk';
+import figlet from 'figlet';
+import inquirer from 'inquirer';
+import Enigma from './enigma.js';
+import questions from './questions.js';
 
 const askSettings = async () => {
   const settings = await inquirer.prompt(questions);
@@ -16,9 +16,9 @@ const askSettings = async () => {
 const encrypt = settings => {
   var enigma = new Enigma(
     [
-      [settings.rotor1_definition, settings.rotor1_position],
-      [settings.rotor2_definition, settings.rotor2_position],
-      [settings.rotor3_definition, settings.rotor3_position]
+      {definition: settings.rotor1_definition, position: settings.rotor1_position},
+      {definition: settings.rotor2_definition, position: settings.rotor2_position},
+      {definition: settings.rotor3_definition, position: settings.rotor3_position},
     ],
     settings.reflector_definition,
     settings.plugboard_definition,

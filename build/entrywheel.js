@@ -5,14 +5,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-const Roller = require('./roller');
+var _roller = _interopRequireDefault(require("./roller.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 /**
  *  É o rolo de entrada
  */
-
-
-class EntryWheel extends Roller {
+class EntryWheel extends _roller.default {
   constructor(wiring, name) {
+    super();
     this.setWiring(wiring);
     this.setName(name);
   }

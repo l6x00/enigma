@@ -1,24 +1,50 @@
-// Main script
-const { Reflector } = require('./reflector');
-const { Plugboard } = require('./plugboard');
+import Rotor from './rotor.js'
+import EntryWheel from './entrywheel.js'
+import Plugboard from './plugboard.js'
+import Reflector from './reflector.js'
 
-class Enigma {
+/**
+ * Main Class
+ */
+export default class Enigma {
   alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   rotors = null;
-  ukw = null;
+  entryWheel = null;
   plugboard = null;
   reflector = null;
 
-  constructor(rotors, ukw, plugboard, reflector) {
-    this.rotors = rotors;
-    this.ukw = ukw;
-    this.plugboard = plugboard;
+  constructor(rotors, entrywheel, plugboard, reflector) {
+    this.rotors = [new Rotor(rotors[0].definition, rotors[0].position), new Rotor(rotors[1].definition, rotors[1].position), new Rotor(rotors[2].definition, rotors[2].position)];
+    
+    console.log(this.rotors)
+   
+    this.entryWheel = new EntryWheel(entrywheel);
+    this.plugboard = new Plugboard(plugboard);
     this.reflector = new Reflector(reflector);
   }
 
-  sendSignal = () => {
+  encryptLetter = (signal) => {
     // Roda uma vez
     this.rotate();
+
+    // Envia o sinal para o plugboard
+    signal = this.plugboard.sendSignal(signal)
+
+    // Envia o sinal para o Entrywheel
+    signal = this.entryWheel.sendSignal(signal)
+
+    // Envia o sinal por todos os rotores
+    this.rotors.foreach((rotor) => {
+      signal = rotor.sendSignal(signal)
+    })
+
+    // Envia o sinal para o Entrywheel na direção inversa (Volta)
+    signal = this.entryWheel(signal, true)
+
+    // Envia o sinal para o plugboard na direção inversa (Volta)
+    signal = this.plugboard(signal, true)
+
+    return signal
   };
 
   rotate = () => {
@@ -57,11 +83,11 @@ class Enigma {
 
     let response = '';
     const stringArray = [...string];
-    // stringArray.foreach(letter => {
-    //   response += this.signal(letter);
-    // });
+    stringArray.foreach(letter => {
+      response += this.encryptLetter(letter);
+    });
 
-    // return response;
+    return response;
   };
 
   getPositions = () => {
@@ -100,5 +126,3 @@ class Enigma {
     });
   };
 }
-
-export { Enigma };

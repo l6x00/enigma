@@ -1,10 +1,12 @@
-import Roller from './roller';
+import Roller from './roller.js'
 
 export default class Rotor extends Roller {
   position = 0;
   ringsetting = 0;
 
   constructor(wiring, notches, name) {
+    super(wiring)
+    console.log("Rotor wiring", wiring)
     this.setWiring(wiring);
     this.setNotches(notches);
     this.setName(name);

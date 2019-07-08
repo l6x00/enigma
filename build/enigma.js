@@ -3,26 +3,51 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Enigma = void 0;
+exports.default = void 0;
+
+var _rotor = _interopRequireDefault(require("./rotor.js"));
+
+var _entrywheel = _interopRequireDefault(require("./entrywheel.js"));
+
+var _plugboard = _interopRequireDefault(require("./plugboard.js"));
+
+var _reflector = _interopRequireDefault(require("./reflector.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-// Main script
+/**
+ * Main Class
+ */
 class Enigma {
-  constructor(rotors, ukw, plugboard, reflector) {
+  constructor(rotors, entrywheel, plugboard, reflector) {
     _defineProperty(this, "alphabet", 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''));
 
     _defineProperty(this, "rotors", null);
 
-    _defineProperty(this, "ukw", null);
+    _defineProperty(this, "entryWheel", null);
 
     _defineProperty(this, "plugboard", null);
 
     _defineProperty(this, "reflector", null);
 
-    _defineProperty(this, "sendSignal", () => {
+    _defineProperty(this, "encryptLetter", signal => {
       // Roda uma vez
-      this.rotate();
+      this.rotate(); // Envia o sinal para o plugboard
+
+      signal = this.plugboard.sendSignal(signal); // Envia o sinal para o Entrywheel
+
+      signal = this.entryWheel.sendSignal(signal); // Envia o sinal por todos os rotores
+
+      this.rotors.foreach(rotor => {
+        signal = rotor.sendSignal(signal);
+      }); // Envia o sinal para o Entrywheel na direção inversa (Volta)
+
+      signal = this.entryWheel(signal, true); // Envia o sinal para o plugboard na direção inversa (Volta)
+
+      signal = this.plugboard(signal, true);
+      return signal;
     });
 
     _defineProperty(this, "rotate", () => {
@@ -49,10 +74,11 @@ class Enigma {
       string = typeof string === 'string' ? string : string.toString();
       string = string.toUpperCase().replace(new RegExp('[^' + this.reflector.wiring + ']', 'g'), '').split('');
       let response = '';
-      const stringArray = [...string]; // stringArray.foreach(letter => {
-      //   response += this.signal(letter);
-      // });
-      // return response;
+      const stringArray = [...string];
+      stringArray.foreach(letter => {
+        response += this.encryptLetter(letter);
+      });
+      return response;
     });
 
     _defineProperty(this, "getPositions", () => {
@@ -85,12 +111,13 @@ class Enigma {
       });
     });
 
-    this.rotors = rotors;
-    this.ukw = ukw;
-    this.plugboard = plugboard;
-    this.reflector = reflector;
+    this.rotors = [new _rotor.default(rotors[0].definition, rotors[0].position), new _rotor.default(rotors[1].definition, rotors[1].position), new _rotor.default(rotors[2].definition, rotors[2].position)];
+    console.log(this.rotors);
+    this.entryWheel = new _entrywheel.default(entrywheel);
+    this.plugboard = new _plugboard.default(plugboard);
+    this.reflector = new _reflector.default(reflector);
   }
 
 }
 
-exports.Enigma = Enigma;
+exports.default = Enigma;

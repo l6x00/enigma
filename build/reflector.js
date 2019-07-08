@@ -5,10 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-const Roller = require('./roller');
+var _roller = _interopRequireDefault(require("./roller.js"));
 
-class Reflector extends Roller {
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+class Reflector extends _roller.default {
   constructor(wiring, name) {
+    super();
     this.setWiring(wiring);
     this.setName(name);
   }

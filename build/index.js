@@ -1,36 +1,44 @@
 'use strict';
 
+var _chalk = _interopRequireDefault(require("chalk"));
+
+var _figlet = _interopRequireDefault(require("figlet"));
+
+var _inquirer = _interopRequireDefault(require("inquirer"));
+
+var _enigma = _interopRequireDefault(require("./enigma.js"));
+
+var _questions = _interopRequireDefault(require("./questions.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 require('babel-polyfill');
 
-const chalk = require('chalk');
-
-const figlet = require('figlet');
-
-const inquirer = require('inquirer');
-
-const {
-  Enigma
-} = require('./enigma.js');
-
-const {
-  questions
-} = require('./questions.js');
-
 const askSettings = async () => {
-  const settings = await inquirer.prompt(questions);
+  const settings = await _inquirer.default.prompt(_questions.default);
   return settings;
 };
 
 const encrypt = settings => {
-  var enigma = new Enigma([[settings.rotor1_definition, settings.rotor1_position], [settings.rotor2_definition, settings.rotor2_position], [settings.rotor3_definition, settings.rotor3_position]], settings.reflector_definition, settings.plugboard_definition, settings.entrywheel_definition);
+  var enigma = new _enigma.default([{
+    definition: settings.rotor1_definition,
+    position: settings.rotor1_position
+  }, {
+    definition: settings.rotor2_definition,
+    position: settings.rotor2_position
+  }, {
+    definition: settings.rotor3_definition,
+    position: settings.rotor3_position
+  }], settings.reflector_definition, settings.plugboard_definition, settings.entrywheel_definition);
   console.log(enigma);
   console.log(enigma.encrypt('EXAMPLEMESSAGE'));
 };
 
 const init = async () => {
-  const enigma = chalk.redBright(figlet.textSync('ENIGMA', {
+  const enigma = _chalk.default.redBright(_figlet.default.textSync('ENIGMA', {
     font: 'Cybermedium'
   }));
+
   console.log(enigma);
   const settings = await askSettings();
   console.log(settings);

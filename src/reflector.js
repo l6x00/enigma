@@ -1,10 +1,9 @@
-const Roller = require('./roller');
+import Roller from './roller.js'
 
-class Reflector extends Roller {
+export default class Reflector extends Roller {
   constructor(wiring, name) {
+    super()
     this.setWiring(wiring);
     this.setName(name);
   }
 }
-
-export { Reflector };

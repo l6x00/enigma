@@ -16,8 +16,9 @@ class Roller {
     _defineProperty(this, "wiring", []);
 
     _defineProperty(this, "setWiring", wiring => {
-      this.verifyUniqueWiring(wiring);
+      console.log("setWiring", wiring);
       this.wiring = this.convertWiring(wiring);
+      this.verifyUniqueWiring(wiring);
     });
 
     _defineProperty(this, "convertWiring", wiring => {
@@ -35,7 +36,9 @@ class Roller {
     });
 
     _defineProperty(this, "verifyUniqueWiring", wiring => {
-      if (wiring.some(function (e, i, l) {
+      console.log("verifyUniqueWiring", wiring);
+
+      if (this.wiring.some(function (e, i, l) {
         return l.indexOf(e) !== l.lastIndexOf(e);
       }) || wiring.length !== this.alphabet.length) {
         throw new Error('O Walze deve ter ' + this.alphabet.length + ' caracteres únicos.');
@@ -52,8 +55,8 @@ class Roller {
       return signal;
     });
 
-    this.setWiring(_wiring);
-    this.setName(_name);
+    console.log(_wiring); //this.setWiring(wiring);
+    //this.setName(name);
   }
 
 }

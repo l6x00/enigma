@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.questions = void 0;
+exports.default = void 0;
 const questions = [{
   type: 'input',
   name: 'rotor1_definition',
@@ -54,4 +54,5 @@ const questions = [{
   name: 'text',
   message: "What's the text to be cryptographed?"
 }];
-exports.questions = questions;
+var _default = questions;
+exports.default = _default;
