@@ -57,8 +57,7 @@ const questions = [
     type: 'input',
     name: 'text',
     message: "What's the text to be cryptographed?",
-    //default: 'A'
-    default: 'FFPUJHVUHGERHGFYLOFUQWDHGPHWOYMTGHFXGNKWOQUTCXHNSQZKEVPUIGDWJDALCTXM '
+    default: 'Amerikanische Truppen, die von der Nordsee kommen, werden von der Juno ankommen'
   }
 ];
 
