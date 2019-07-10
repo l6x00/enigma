@@ -13,7 +13,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 class Rotor extends _roller.default {
   constructor(wiring, _notches, name) {
-    super(wiring);
+    super();
 
     _defineProperty(this, "position", 0);
 
@@ -21,11 +21,15 @@ class Rotor extends _roller.default {
 
     _defineProperty(this, "sendSignal", (signal, reverse) => {
       let position;
-      position = this.alphabet.indexOf(signal);
-      position = (position + this.position + this.alphabet.lenght - this.ringsetting) % this.alphabet.lenght;
+      position = this.alphabet.indexOf(signal); // console.log("this.position", this.position)
+      // console.log("position", position)
+      // console.log("this.ringsetting", this.ringsetting)
+      // console.log("this.alphabet.length", this.alphabet.length)
+
+      position = (position + this.position + this.alphabet.length - this.ringsetting) % this.alphabet.length;
       signal = this.alphabet[position];
       if (reverse) position = this.wiring.indexOf(signal);
-      signal = reverse ? this.alphabet[position] : this.wiring[pos];
+      signal = reverse ? this.alphabet[position] : this.wiring[position];
       position = this.alphabet.indexOf(signal);
       position = (position + (this.alphabet.length - this.position + this.ringsetting)) % this.alphabet.length;
       signal = this.alphabet[position];
@@ -33,7 +37,7 @@ class Rotor extends _roller.default {
     });
 
     _defineProperty(this, "rotate", () => {
-      this.position = (this.position + 1) % this.alphabet.length;
+      this.position = (this.position + 1) % this.alphabet.length; // console.log("rotate", this.position);
     });
 
     _defineProperty(this, "inNotch", () => {
@@ -88,6 +92,7 @@ class Rotor extends _roller.default {
 
     _defineProperty(this, "setPosition", position => {
       this.position = this.alphabet.indexOf(position);
+      console.log("setPosition", this.position);
     });
 
     _defineProperty(this, "getRingSetting", () => this.alphabet[this.ringsetting]);
@@ -96,7 +101,6 @@ class Rotor extends _roller.default {
       this.ringsetting = this.alphabet.indexOf(setting);
     });
 
-    console.log("Rotor wiring", wiring);
     this.setWiring(wiring);
     this.setNotches(_notches);
     this.setName(name);

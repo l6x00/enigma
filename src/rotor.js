@@ -5,8 +5,8 @@ export default class Rotor extends Roller {
   ringsetting = 0;
 
   constructor(wiring, notches, name) {
-    super(wiring)
-    console.log("Rotor wiring", wiring)
+    super()
+
     this.setWiring(wiring);
     this.setNotches(notches);
     this.setName(name);
@@ -16,15 +16,23 @@ export default class Rotor extends Roller {
     let position;
 
     position = this.alphabet.indexOf(signal);
+
+
+    // console.log("this.position", this.position)
+    // console.log("position", position)
+    // console.log("this.ringsetting", this.ringsetting)
+    // console.log("this.alphabet.length", this.alphabet.length)
     position =
-      (position + this.position + this.alphabet.lenght - this.ringsetting) %
-      this.alphabet.lenght;
+      (position + this.position + this.alphabet.length - this.ringsetting) %
+      this.alphabet.length;
+
+
 
     signal = this.alphabet[position];
 
     if (reverse) position = this.wiring.indexOf(signal);
 
-    signal = reverse ? this.alphabet[position] : this.wiring[pos];
+    signal = reverse ? this.alphabet[position] : this.wiring[position];
 
     position = this.alphabet.indexOf(signal);
     position =
@@ -37,6 +45,7 @@ export default class Rotor extends Roller {
 
   rotate = () => {
     this.position = (this.position + 1) % this.alphabet.length;
+    // console.log("rotate", this.position);
   };
 
   inNotch = () => {
@@ -99,6 +108,7 @@ export default class Rotor extends Roller {
 
   setPosition = position => {
     this.position = this.alphabet.indexOf(position);
+    console.log("setPosition", this.position);
   };
 
   getRingSetting = () => this.alphabet[this.ringsetting];

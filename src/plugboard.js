@@ -30,7 +30,7 @@ export default class Plugboard extends Roller {
   setWiringByPlugs = plugs => {
     let wiring = this.alphabet.slice();
 
-    plugs.forEach(plug => {
+    plugs.map(plug => {
       plug = plug.split('');
       wiring[this.alphabet.indexOf(plug[0])] = plug[1];
       wiring[this.alphabet.indexOf(plug[1])] = plug[0];

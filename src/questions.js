@@ -56,7 +56,9 @@ const questions = [
   {
     type: 'input',
     name: 'text',
-    message: "What's the text to be cryptographed?"
+    message: "What's the text to be cryptographed?",
+    //default: 'A'
+    default: 'FFPUJHVUHGERHGFYLOFUQWDHGPHWOYMTGHFXGNKWOQUTCXHNSQZKEVPUIGDWJDALCTXM '
   }
 ];
 

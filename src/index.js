@@ -20,13 +20,13 @@ const encrypt = settings => {
       {definition: settings.rotor2_definition, position: settings.rotor2_position},
       {definition: settings.rotor3_definition, position: settings.rotor3_position},
     ],
-    settings.reflector_definition,
+    settings.entrywheel_definition,
     settings.plugboard_definition,
-    settings.entrywheel_definition
+    settings.reflector_definition
   );
 
-  console.log(enigma);
-  console.log(enigma.encrypt('EXAMPLEMESSAGE'));
+  enigma.encrypt(settings.text)
+
 };
 
 const init = async () => {
@@ -36,9 +36,7 @@ const init = async () => {
     })
   );
 
-  console.log(enigma);
   const settings = await askSettings();
-  console.log(settings);
 
   encrypt(settings);
 };
